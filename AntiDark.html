@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>パズドラ人力闇解除</title>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+
+$(function(){
+	var i=0;
+	$("#fld td").each(function(){
+		this.id = "c" + i;
+		i++;
+	});
+
+	var current = 0;
+	updateCurrent();
+
+	$(window).keydown(function (e){
+		if (e.keyCode == 8) { // BS
+			current--;
+		} else {
+
+			var key = String.fromCharCode(e.keyCode).toLowerCase();
+			color = $("#key_" + key).css("background-color");
+			$("#c" + current).css({"background-color": color});
+			current++;
+		}
+		updateCurrent();
+
+		return false;
+	});
+
+	$("#clear").click(function(){
+		for (var i=0; i<30; i++) {
+			$("#c" + i).css({"background-color": "white"});
+		}
+		current = 0;
+		updateCurrent();
+	});
+
+	function updateCurrent() {
+		$("#fld td"     ).removeClass("current");
+		$("#c" + current).addClass   ("current");
+	}
+});
+
+</script>
+<style>
+table {
+	empty-cells	: show;
+}
+td {
+	border			: solid 1px black;
+	width			: 30px;
+	height			: 30px;
+	text-align		: center;
+	font-weight		: bold;
+}
+
+td.current {
+	box-shadow: rgba(0, 0, 0, 0.57) 0px 0px 2px 2px;
+}
+
+table#fld td {
+	border-radius	: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<table id="keys">
+<tr>
+<td id="key_a" style="background-color: red;         ">a</td>
+<td id="key_s" style="background-color: deepskyblue; ">s</td>
+<td id="key_d" style="background-color: limegreen;   ">d</td>
+<td id="key_f" style="background-color: yellow;      ">f</td>
+<td id="key_g" style="background-color: mediumorchid;">g</td>
+<td id="key_z" style="background-color: pink;        ">z</td>
+</tr>
+<tr><td colspan=6>BS...back</td></tr>
+</table>
+
+<br>
+
+<table id="fld">
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table>
+
+<br>
+
+<input id="clear" type="button" value="clear">
+
+</body>
+</html>
