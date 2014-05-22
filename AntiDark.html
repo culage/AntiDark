@@ -19,7 +19,6 @@ $(function(){
 		if (e.keyCode == 8) { // BS
 			current--;
 		} else {
-
 			var key = String.fromCharCode(e.keyCode).toLowerCase();
 			color = $("#key_" + key).css("background-color");
 			$("#c" + current).css({"background-color": color});
@@ -42,6 +41,18 @@ $(function(){
 		$("#fld td"     ).removeClass("current");
 		$("#c" + current).addClass   ("current");
 	}
+
+	$("#keys td").click(function(){
+		var keyCode;
+		if (this.innerHTML.length == 1) {
+			keyCode = this.innerHTML.charCodeAt(0);
+		} else {
+			keyCode = 8; // BS
+		}
+		var evt = $.Event('keydown');
+		evt.keyCode = keyCode;
+		$(window).trigger(evt);
+	});
 });
 
 </script>
@@ -78,7 +89,7 @@ table#fld td {
 <td id="key_g" style="background-color: mediumorchid;">g</td>
 <td id="key_z" style="background-color: pink;        ">z</td>
 </tr>
-<tr><td colspan=6>BS...back</td></tr>
+<tr><td id="key_bs" colspan=6>BS...back</td></tr>
 </table>
 
 <br>
